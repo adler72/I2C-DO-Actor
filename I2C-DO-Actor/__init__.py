@@ -66,12 +66,11 @@ class CustomActor(CBPiActor):
       except: # exception if write_byte fails
           pass
       self.state = False
-
-   async def set_power(self, power):
+    async def set_power(self, power):
       self.power = power
       pass
-   
-   def get_state(self):
+
+    def get_state(self):
       return self.state
   
 def setup(cbpi):
