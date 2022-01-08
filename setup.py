@@ -11,5 +11,5 @@ setup(name='I2C-DO-Actor',
         # If any package contains *.txt or *.rst files, include them:
       '': ['*.txt', '*.rst', '*.yaml'],
       'I2C-AO-Actor': ['*','*.txt', '*.rst', '*.yaml']},
-      packages=['I2C-AO-Actor'],
+      packages=['I2C-DO-Actor'],
      )
