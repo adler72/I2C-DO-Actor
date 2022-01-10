@@ -46,7 +46,7 @@ class CustomActor(CBPiActor):
     async def on(self, power=0):
       logger.info("ACTOR %s ON" % self.id)
       self.power = int(power)
-      o1 = set_bit(o1, self.port_DO)
+      o1 = int(set_bit(o1, self.port_DO))
       try:
            bus.write_byte(self.adress_DO,255-o1)
       except: # exception if write_byte fails
@@ -56,12 +56,22 @@ class CustomActor(CBPiActor):
     async def off(self):
       logger.info("ACTOR %s OFF " % self.id)
       bus = SMBus(1) # 1 indicates /dev/i2c-1
-      o1 = clear_bit(o1, 6)
+      o1 = int(clear_bit(o1, self.port_DO))
       try:
           bus.write_byte(self.adress_DO,255-o1)
       except: # exception if write_byte fails
           pass
       self.state = False
+
+    async def run(self):
+      bus = SMBus(1) # 1 indicates /dev/i2c-1  
+      o1 = int(set_bit(o1, self.port_DO))
+      try:
+           bus.write_byte(self.adress_DO,255-o1)
+      except: # exception if write_byte fails
+          pass  
+      self.state = True
+
     async def set_power(self, power):
       self.power = power
       pass
