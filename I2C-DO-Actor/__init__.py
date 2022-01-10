@@ -22,7 +22,14 @@ def get_Address():
             except:
                 pass
         return addresses
+def set_bit(value, bit):
+        print(value | (1<<bit))    #Ausgabe in der Python Shell
+        return value | (1<<bit)
 
+#Funktion rücksetzte Bit in Variable / Function reset Bit in byte
+def clear_bit(value, bit):
+          print(value & ~(1<<bit))    #Ausgabe in der Python Shell
+          return value & ~(1<<bit)
 
 @parameters([Property.Select("Address DO", get_Address(), description="The I2C actor address."),Property.Select("Port DO", options=[0,1,2,3,4,5,6,7], description="Port of the Digital-Ouput-Modul to which the actor is connected")])
 class CustomActor(CBPiActor):
