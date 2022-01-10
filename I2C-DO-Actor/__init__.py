@@ -38,8 +38,8 @@ class CustomActor(CBPiActor):
  
     async def on_start(self):
         self.power = None
-        self.adress_DO = int(self.props.get("Adress AO",88))
-        self.port_DO = int(self.props.get("Port AO",0))
+        self.adress_DO = int(self.props.get("Adress DO",32))
+        self.port_DO = int(self.props.get("Port DO",0))
         self.bus = SMBus(1) # 1 indicates /dev/i2c-1
         self.state = False  
    
