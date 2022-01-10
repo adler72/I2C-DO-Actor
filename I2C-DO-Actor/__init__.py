@@ -35,18 +35,14 @@ class CustomActor(CBPiActor):
         if self.power > 100:
             self.power = 100           
         await self.set_power(self.power)  
-
-    def __init__(self,cbpi):
-        self.cbpi = cbpi
-        self._task = asyncio.create_task(self.init_actor())
-
-    async def init_actor(self):
-      self.adress_DO = int(self.props.get("Adress DO",88))
-      self.port_DO = int(self.props.get("Port DO",0))
-      self.bus = SMBus(1) # 1 indicates /dev/i2c-1
-      global o1
-      pass
-
+ 
+    async def on_start(self):
+        self.power = None
+        self.adress_DO = int(self.props.get("Adress AO",88))
+        self.port_DO = int(self.props.get("Port AO",0))
+        self.bus = SMBus(1) # 1 indicates /dev/i2c-1
+        self.state = False  
+   
     async def on(self, power=0):
       logger.info("ACTOR %s ON" % self.id)
       self.power = int(power)
